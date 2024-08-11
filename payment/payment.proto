@@ -1,15 +1,18 @@
 syntax = "proto3";
 
-option go_package = "github.com/KhanbalaRashidov/microservices-proto/shipping";
+option go_package = "github.com/KhanbalaRashidov/microservices-proto/payment";
 
-message CreateShippingRequest {
-  string address = 1;
+message CreatePaymentRequest {
+  int64 user_id = 1;
+  int64 order_id = 2;
+  float total_price = 3;
 }
 
-message CreateShippingResponse {
-
+message CreatePaymentResponse {
+  int64 payment_id = 1;
+  int64 bill_id = 2;
 }
 
-service Shipping {
-  rpc Create(CreateShippingRequest) returns (CreateShippingResponse){}
+service Payment {
+  rpc Create(CreatePaymentRequest) returns (CreatePaymentResponse){}
 }
