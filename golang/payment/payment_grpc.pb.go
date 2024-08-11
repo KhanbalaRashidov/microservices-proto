@@ -4,7 +4,7 @@
 // - protoc             v5.27.3
 // source: payment.proto
 
-package shipping
+package payment
 
 import (
 	context "context"
@@ -19,101 +19,101 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Shipping_Create_FullMethodName = "/Shipping/Create"
+	Payment_Create_FullMethodName = "/Payment/Create"
 )
 
-// ShippingClient is the client API for Shipping service.
+// PaymentClient is the client API for Payment service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type ShippingClient interface {
-	Create(ctx context.Context, in *CreateShippingRequest, opts ...grpc.CallOption) (*CreateShippingResponse, error)
+type PaymentClient interface {
+	Create(ctx context.Context, in *CreatePaymentRequest, opts ...grpc.CallOption) (*CreatePaymentResponse, error)
 }
 
-type shippingClient struct {
+type paymentClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewShippingClient(cc grpc.ClientConnInterface) ShippingClient {
-	return &shippingClient{cc}
+func NewPaymentClient(cc grpc.ClientConnInterface) PaymentClient {
+	return &paymentClient{cc}
 }
 
-func (c *shippingClient) Create(ctx context.Context, in *CreateShippingRequest, opts ...grpc.CallOption) (*CreateShippingResponse, error) {
+func (c *paymentClient) Create(ctx context.Context, in *CreatePaymentRequest, opts ...grpc.CallOption) (*CreatePaymentResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CreateShippingResponse)
-	err := c.cc.Invoke(ctx, Shipping_Create_FullMethodName, in, out, cOpts...)
+	out := new(CreatePaymentResponse)
+	err := c.cc.Invoke(ctx, Payment_Create_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// ShippingServer is the server API for Shipping service.
-// All implementations must embed UnimplementedShippingServer
+// PaymentServer is the server API for Payment service.
+// All implementations must embed UnimplementedPaymentServer
 // for forward compatibility.
-type ShippingServer interface {
-	Create(context.Context, *CreateShippingRequest) (*CreateShippingResponse, error)
-	mustEmbedUnimplementedShippingServer()
+type PaymentServer interface {
+	Create(context.Context, *CreatePaymentRequest) (*CreatePaymentResponse, error)
+	mustEmbedUnimplementedPaymentServer()
 }
 
-// UnimplementedShippingServer must be embedded to have
+// UnimplementedPaymentServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedShippingServer struct{}
+type UnimplementedPaymentServer struct{}
 
-func (UnimplementedShippingServer) Create(context.Context, *CreateShippingRequest) (*CreateShippingResponse, error) {
+func (UnimplementedPaymentServer) Create(context.Context, *CreatePaymentRequest) (*CreatePaymentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
 }
-func (UnimplementedShippingServer) mustEmbedUnimplementedShippingServer() {}
-func (UnimplementedShippingServer) testEmbeddedByValue()                  {}
+func (UnimplementedPaymentServer) mustEmbedUnimplementedPaymentServer() {}
+func (UnimplementedPaymentServer) testEmbeddedByValue()                 {}
 
-// UnsafeShippingServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to ShippingServer will
+// UnsafePaymentServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to PaymentServer will
 // result in compilation errors.
-type UnsafeShippingServer interface {
-	mustEmbedUnimplementedShippingServer()
+type UnsafePaymentServer interface {
+	mustEmbedUnimplementedPaymentServer()
 }
 
-func RegisterShippingServer(s grpc.ServiceRegistrar, srv ShippingServer) {
-	// If the following call pancis, it indicates UnimplementedShippingServer was
+func RegisterPaymentServer(s grpc.ServiceRegistrar, srv PaymentServer) {
+	// If the following call pancis, it indicates UnimplementedPaymentServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&Shipping_ServiceDesc, srv)
+	s.RegisterService(&Payment_ServiceDesc, srv)
 }
 
-func _Shipping_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateShippingRequest)
+func _Payment_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreatePaymentRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ShippingServer).Create(ctx, in)
+		return srv.(PaymentServer).Create(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Shipping_Create_FullMethodName,
+		FullMethod: Payment_Create_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ShippingServer).Create(ctx, req.(*CreateShippingRequest))
+		return srv.(PaymentServer).Create(ctx, req.(*CreatePaymentRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// Shipping_ServiceDesc is the grpc.ServiceDesc for Shipping service.
+// Payment_ServiceDesc is the grpc.ServiceDesc for Payment service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var Shipping_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "Shipping",
-	HandlerType: (*ShippingServer)(nil),
+var Payment_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "Payment",
+	HandlerType: (*PaymentServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "Create",
-			Handler:    _Shipping_Create_Handler,
+			Handler:    _Payment_Create_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
