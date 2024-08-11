@@ -1,4 +1,4 @@
-module github.com/KhanbalaRashidov/microservices-proto/shipping
+module github.com/KhanbalaRashidov/microservices-proto/golang/shipping
 
 go 1.22.5
 

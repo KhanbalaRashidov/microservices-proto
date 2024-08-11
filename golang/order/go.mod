@@ -1,4 +1,4 @@
-module github.com/KhanbalaRashidov/microservices-proto/order
+module github.com/KhanbalaRashidov/microservices-proto/golang/order
 
 go 1.22.5
 
